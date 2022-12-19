@@ -55,7 +55,7 @@ def train(args,seed,writer=None):
     env.close()
 
 # 'environment name: molecule; graph'
-env = "pinball"
+env = "molecule-circus"
 
 def arg_parser():
     """
