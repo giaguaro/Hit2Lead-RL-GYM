@@ -111,16 +111,7 @@ def get_att_points(mol):
             att_points.append(a.GetIdx())
 
     return att_points
-
-def map_idx(idx, idx_list, mol):
-    abs_id = idx_list[idx]
-    neigh_idx = mol.GetAtomWithIdx(abs_id).GetNeighbors()[0].GetIdx()
-    return neigh_idx 
   
-def reward_vina(smis, predictor, reward_vina_min=0):
-    reward = - np.array(predictor.predict(smis))
-    reward = np.clip(reward, reward_vina_min, None)
-    return reward
 
 class LigEnv(gym.Env):
     metadata = {'render.modes': ['human']}
@@ -204,7 +195,7 @@ class LigEnv(gym.Env):
 
             mmgbsa_scores = mmgbsa.extract_results(csv_out)
 
-            score = mmgbsa_scores['r_psp_MMGBSA_dG_Bind']
+            score = -1 * mmgbsa_scores['r_psp_MMGBSA_dG_Bind']
 
             reward = np.clip(score, reward_mmgbsa_min, None) + self.reward_med
             
@@ -226,7 +217,7 @@ class LigEnv(gym.Env):
 
             mmgbsa_scores = mmgbsa.extract_results(csv_out)
 
-            score = mmgbsa_scores['r_psp_MMGBSA_dG_Bind']
+            score = -1 * mmgbsa_scores['r_psp_MMGBSA_dG_Bind']
 
             reward = np.clip(score, reward_mmgbsa_min, None) + self.reward_med
         return reward
