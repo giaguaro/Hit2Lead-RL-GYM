@@ -23,6 +23,7 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors3D 
 from rdkit.Chem import Descriptors
 from rdkit.Chem import MACCSkeys
+from rdkit.Chem import rdDistGeom
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from biopandas.pdb import PandasPdb
 
@@ -73,7 +74,7 @@ class ElabMols():
         molIndex2=mol2.GetAtomWithIdx(du2).SetAtomicNum(1)
 
         aligned=Chem.rdMolAlign.AlignMol(mol2,mol1,atomMap=((ca2,du1),(du2,ca1))) 
-        connected=connectMols(mol1, mol2, du1, du2)
+        connected=self.connectMols(mol1, mol2, du1, du2)
         
         #################### naturalize dummy atom! ########################
 #         for atom in connected.GetAtoms():
