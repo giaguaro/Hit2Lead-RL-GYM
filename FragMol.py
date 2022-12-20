@@ -35,7 +35,7 @@ class SplitMol:
         self.pdb=PDB
         self.records=['ATOM']
 #         self.values=['HOH','CL','MG','ZN','MN','CA']
-        self.ions=['HOH','CL','MG','ZN','MN','CA','FE','CO','K','CU', 'AG', 'NA', 'B', 'SI']
+        self.ions=['HOH'] #,'CL','MG','ZN','MN','CA','FE','CO','K','CU', 'AG', 'NA', 'B', 'SI']
 
         self.path = os.getcwd()
 
@@ -75,7 +75,7 @@ class SplitMol:
         #print(begin_atom.GetAtomicNum(), end_atom.GetAtomicNum(), MOL_SPLIT_START)
         
         # Now check if end or begenning atoms are in ring (we dont wanna bother those)
-        if not(begin_atom.IsInRing() or end_atom.IsInRing()):
+        if not(begin_atom.IsInRing() and end_atom.IsInRing()):
             return False
         elif begin_atom.GetAtomicNum() >= self.MOL_SPLIT_START or \
                 end_atom.GetAtomicNum() >= self.MOL_SPLIT_START:
