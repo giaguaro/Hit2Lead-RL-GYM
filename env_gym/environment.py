@@ -120,7 +120,7 @@ class LigEnv(gym.Env):
         own init function, since gym does not support passing argument
         '''
 
-        self.mol = FRAG_VOCAB[0]
+        self.mol = CORE_VOCAB[np.randint(0,len(CORE_VOCAB))]
         
         elabmols = ElabMols()
         
